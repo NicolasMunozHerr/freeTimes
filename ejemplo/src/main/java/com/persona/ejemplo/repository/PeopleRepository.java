@@ -2,6 +2,7 @@ package com.persona.ejemplo.repository;
 
 
 import com.persona.ejemplo.entity.PeopleEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

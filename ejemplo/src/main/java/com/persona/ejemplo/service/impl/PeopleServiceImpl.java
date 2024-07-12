@@ -5,6 +5,7 @@ import com.persona.ejemplo.repository.PeopleRepository;
 import com.persona.ejemplo.service.PeopleService;
 import com.persona.ejemplo.specification.PeopleSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +16,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class PeopleServiceImpl implements PeopleService{
 
-    private final PeopleRepository peopleRepository;
+    @Autowired
+    private PeopleRepository peopleRepository;
 
     private final Sort sort = Sort.by(Sort.Order.asc("id"));
 
