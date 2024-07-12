@@ -5,6 +5,7 @@ import com.persona.ejemplo.repository.PeopleRepository;
 import com.persona.ejemplo.service.PeopleService;
 import com.persona.ejemplo.specification.PeopleSpecification;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class PeopleServiceImpl implements PeopleService{
 
@@ -42,8 +44,8 @@ public class PeopleServiceImpl implements PeopleService{
     @Override
     public Page<PeopleEntity> listByText(String searchText, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
-
-        return peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), pageable);
+        var res = peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), pageable);
+        return res;
     }
 
 

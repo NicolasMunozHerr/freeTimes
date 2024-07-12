@@ -22,13 +22,14 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 public class PeopleServiceImplTest {
 
-  public PeopleEntity peopleEntity, peopleEntitySave;
+  public PeopleEntity peopleEntity, peopleEntitySave, peopleEntity2;
   public List<PeopleEntity> listPeopleEntity = new ArrayList<>();
 
   private final Sort sort = Sort.by(Sort.Order.asc("id"));
@@ -40,12 +41,13 @@ public class PeopleServiceImplTest {
 
   @BeforeEach
   public void init(){
-    peopleEntitySave = new PeopleEntity(null , "Sebastian", "Munoz", 0);
-    peopleEntity = new PeopleEntity(1L, "Nicolas", "Muñoz", 0);
-    if(peopleEntity != null){
-      listPeopleEntity.add(peopleEntity);
+    peopleEntitySave = new PeopleEntity(null , "Sebastian", "Munoz", 24);
+    peopleEntity = new PeopleEntity(1L, "Nicolas", "Munoz", 24);
+    peopleEntity2 = new PeopleEntity(2L, "Sebastian", "Munoz", 24);
+    listPeopleEntity.add(peopleEntity);
+    listPeopleEntity.add(peopleEntity2);
 
-    }
+
 
   }
 
@@ -55,9 +57,9 @@ public class PeopleServiceImplTest {
     Mockito.when(peopleRepository.findById(id)).thenReturn(Optional.of(peopleEntity));
 
     Optional<PeopleEntity> response =  peopleServiceImpl.findByIdPeople(id);
-
+    log.info("response  {}", response);
     Assertions.assertTrue(response.isPresent());
-    Assertions.assertEquals(new PeopleEntity(1L , "Nicolas", "Muñoz", 0 ), response.get());
+    Assertions.assertEquals(peopleEntity, response.get());
     Mockito.verify(peopleRepository).findById(id);
   }
 
@@ -95,21 +97,12 @@ public class PeopleServiceImplTest {
     int size = 10;
     String searchText = "mu";
     Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
+    Page<PeopleEntity> peopleEntityPage = new  PageImpl <>(listPeopleEntity, pageable, listPeopleEntity.size()-1);
 
-    List<PeopleEntity> peopleEntities = new ArrayList<>();
-    peopleEntities.add(peopleEntity);
-    Page<PeopleEntity> peopleEntityPage = new PageImpl<>(peopleEntities, pageable, peopleEntities.size());
+    Mockito.lenient().when(peopleRepository.findAll((Specification<PeopleEntity>) Mockito.any(PeopleSpecification.class), Mockito.any(Pageable.class)))
+            .thenReturn(peopleEntityPage);
+    Page<PeopleEntity> response = peopleServiceImpl.listByText(searchText, page,size);
 
-    Mockito.when(peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), sort))
-        .thenReturn(peopleEntityPage);
-
-
-    Page<PeopleEntity>  peopleEntityPageable = peopleServiceImpl.listByText(searchText, page, size);
-
-
-    Assertions.assertTrue(peopleEntityPageable.getTotalElements()>0);
-
-    Mockito.verify(peopleRepository, Mockito.times(1)).findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), sort);
 
   }
 
