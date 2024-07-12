@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PeopleController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ejemplo</a> &gt; <a href="index.source.html" class="el_package">com.persona.ejemplo.controller</a> &gt; <span class="el_source">PeopleController.java</span></div><h1>PeopleController.java</h1><pre class="source lang-java linenums">package com.persona.ejemplo.controller;
+
+
+import com.persona.ejemplo.entity.PeopleEntity;
+import com.persona.ejemplo.service.PeopleService;
+import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.data.domain.Page;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+<span class="nc" id="L19">@RequiredArgsConstructor</span>
+@RequestMapping(&quot;/api&quot;)
+public class PeopleController {
+
+    private final PeopleService peopleService;
+
+    private final PagedResourcesAssembler&lt;PeopleEntity&gt; pagedResourcesAssembler;
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity&lt;PeopleEntity&gt; createPeople(@RequestBody PeopleEntity peopleEntity){
+<span class="nc" id="L30">        return ResponseEntity.ok(peopleService.createPeople(peopleEntity));</span>
+    }
+
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt; PeopleEntity&gt; finbyId(@PathVariable Long id ){
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if(id == null){</span>
+<span class="nc" id="L37">            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PeopleEntity());</span>
+        }else{
+<span class="nc" id="L39">            return ResponseEntity.of(peopleService.findByIdPeople(id));</span>
+
+        }
+    }
+
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity&lt;List&lt;PeopleEntity&gt;&gt; listAllPeople(){
+<span class="nc" id="L48">        return ResponseEntity.ok(peopleService.listPeopleEntities());</span>
+    }
+
+    @GetMapping(&quot;/search&quot;)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity&lt;Page&lt;PeopleEntity&gt;&gt; listPeople(
+            @RequestParam String search,
+            @RequestParam(required = false, defaultValue = &quot;0&quot;) int page ,
+            @RequestParam(required = false, defaultValue = &quot;10&quot;) int size
+    ){
+<span class="nc" id="L58">        return ResponseEntity.ok(peopleService.listByText(search, page, size));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

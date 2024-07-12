@@ -1,0 +1,3 @@
+# Created at 2024-07-11T14:47:10.689
+Corrupted channel by directly writing to native stream in forked JVM 1. Stream 'FATAL ERROR in native method: processing of -javaagent failed, processJavaStart failed'.
+
