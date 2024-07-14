@@ -1,0 +1,11 @@
+##### Notas sobre rabbitmq
+Componentes:
+- Exchange: intercambios de mensajes de una cola a otra
+- Routing key: clave de routeo
+- Cola:  Lista de mensajes que se agrupan del mas viejo al mas nuevo
+- Binding: Nos permite enrutar mensajes en base a su llave a otra cola
+- Virtual host: agrupaciones que se puede hacer en ra bbit -mq
+
+Configuracion:
+- Usar puerto 15672 para interfaz web
+- Puerto 5672 para puerto para ingresar a las funcionaldad como tal
