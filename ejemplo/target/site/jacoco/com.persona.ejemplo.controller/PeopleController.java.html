@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-<span class="nc" id="L19">@RequiredArgsConstructor</span>
+<span class="fc" id="L19">@RequiredArgsConstructor</span>
 @RequestMapping(&quot;/api&quot;)
 public class PeopleController {
 
@@ -27,16 +27,16 @@ public class PeopleController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity&lt;PeopleEntity&gt; createPeople(@RequestBody PeopleEntity peopleEntity){
-<span class="nc" id="L30">        return ResponseEntity.ok(peopleService.createPeople(peopleEntity));</span>
+<span class="fc" id="L30">        return ResponseEntity.ok(peopleService.createPeople(peopleEntity));</span>
     }
 
 
     @GetMapping(&quot;/{id}&quot;)
     public ResponseEntity&lt; PeopleEntity&gt; finbyId(@PathVariable Long id ){
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        if(id == null){</span>
-<span class="nc" id="L37">            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PeopleEntity());</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if(id == null){</span>
+<span class="fc" id="L37">            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new PeopleEntity());</span>
         }else{
-<span class="nc" id="L39">            return ResponseEntity.of(peopleService.findByIdPeople(id));</span>
+<span class="fc" id="L39">            return ResponseEntity.of(peopleService.findByIdPeople(id));</span>
 
         }
     }
@@ -45,7 +45,7 @@ public class PeopleController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity&lt;List&lt;PeopleEntity&gt;&gt; listAllPeople(){
-<span class="nc" id="L48">        return ResponseEntity.ok(peopleService.listPeopleEntities());</span>
+<span class="fc" id="L48">        return ResponseEntity.ok(peopleService.listPeopleEntities());</span>
     }
 
     @GetMapping(&quot;/search&quot;)
@@ -55,7 +55,7 @@ public class PeopleController {
             @RequestParam(required = false, defaultValue = &quot;0&quot;) int page ,
             @RequestParam(required = false, defaultValue = &quot;10&quot;) int size
     ){
-<span class="nc" id="L58">        return ResponseEntity.ok(peopleService.listByText(search, page, size));</span>
+<span class="fc" id="L58">        return ResponseEntity.ok(peopleService.listByText(search, page, size));</span>
     }
 
 }

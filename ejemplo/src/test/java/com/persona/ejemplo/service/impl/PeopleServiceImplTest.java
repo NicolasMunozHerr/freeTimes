@@ -98,10 +98,14 @@ public class PeopleServiceImplTest {
     String searchText = "mu";
     Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
     Page<PeopleEntity> peopleEntityPage = new  PageImpl <>(listPeopleEntity, pageable, listPeopleEntity.size()-1);
-
-    Mockito.lenient().when(peopleRepository.findAll((Specification<PeopleEntity>) Mockito.any(PeopleSpecification.class), Mockito.any(Pageable.class)))
+    Mockito.lenient().when(peopleRepository.findAll(Mockito.any(Specification.class), Mockito.any(Pageable.class)))
             .thenReturn(peopleEntityPage);
     Page<PeopleEntity> response = peopleServiceImpl.listByText(searchText, page,size);
+    if(response !=  null){
+      Assertions.assertEquals(peopleEntityPage.getContent().size(), response.getContent().size());
+    }
+
+    Mockito.verify(peopleRepository, Mockito.times(1)).findAll(Mockito.any(Specification.class), Mockito.any(Pageable.class));
 
 
   }

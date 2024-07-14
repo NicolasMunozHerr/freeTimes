@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 <span class="nc" id="L6">public class PeopleSpecification {</span>
 
     public static Specification&lt;PeopleEntity&gt; firstNameOrLastNameContainsIgnoreCase(String searchText){
-<span class="nc" id="L9">        return (root, query, criteriaBuilder) -&gt; {</span>
+<span class="fc" id="L9">        return (root, query, criteriaBuilder) -&gt; {</span>
 <span class="nc" id="L10">            String searchTextLowerCase = searchText.toLowerCase();</span>
 <span class="nc" id="L11">            return criteriaBuilder.or(</span>
 <span class="nc" id="L12">                    criteriaBuilder.like(criteriaBuilder.lower(root.get(&quot;firstName&quot;)), &quot;%&quot; + searchTextLowerCase + &quot;%&quot;),</span>

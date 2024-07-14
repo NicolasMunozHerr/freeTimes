@@ -44,7 +44,12 @@ public class PeopleServiceImpl implements PeopleService{
     @Override
     public Page<PeopleEntity> listByText(String searchText, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
-        var res = peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), pageable);
+
+        Page<PeopleEntity> res = peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), pageable);
+        log.info("RESSSSS {}", res);
+        if (res != null && !res.getContent().isEmpty()) {
+            log.info("EJEMPLO DE IF {}", res);
+        }
         return res;
     }
 

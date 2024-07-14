@@ -1,8 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-ejemplo,com.persona.ejemplo.controller,PeopleController,43,0,2,0,7,0,6,0,5,0
-ejemplo,com.persona.ejemplo.service.impl,PeopleServiceImpl,19,30,0,0,2,5,1,4,1,4
+ejemplo,com.persona.ejemplo.controller,PeopleController,0,43,0,2,0,7,0,6,0,5
+ejemplo,com.persona.ejemplo.service.impl,PeopleServiceImpl,0,69,2,2,0,12,2,6,0,6
 ejemplo,com.persona.ejemplo,EjemploApplication,8,0,0,0,3,0,2,0,2,0
-ejemplo,com.persona.ejemplo.entity,PeopleEntity.PeopleEntityBuilder,45,0,0,0,1,0,7,0,7,0
-ejemplo,com.persona.ejemplo.entity,PeopleEntity,90,107,20,12,1,7,19,12,5,10
+ejemplo,com.persona.ejemplo.entity,PeopleEntity,0,56,0,0,0,8,0,11,0,11
 ejemplo,com.persona.ejemplo.config,WebConfig,3,0,0,0,1,0,1,0,1,0
-ejemplo,com.persona.ejemplo.specification,PeopleSpecification,30,0,0,0,6,0,3,0,3,0
+ejemplo,com.persona.ejemplo.specification,PeopleSpecification,27,3,0,0,5,1,2,1,2,1

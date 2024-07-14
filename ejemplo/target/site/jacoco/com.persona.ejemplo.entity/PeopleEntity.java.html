@@ -2,28 +2,26 @@
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-<span class="pc bpc" id="L11" title="20 of 32 branches missed.">@Data</span>
-<span class="nc" id="L12">@Builder</span>
-<span class="fc" id="L13">@AllArgsConstructor</span>
-<span class="fc" id="L14">@NoArgsConstructor</span>
+<span class="fc" id="L8">@Setter</span>
+@Getter
+<span class="fc" id="L10">@AllArgsConstructor</span>
+<span class="fc" id="L11">@NoArgsConstructor</span>
+<span class="fc" id="L12">@ToString</span>
 @Table(name = &quot;people&quot;)
 public class PeopleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-<span class="fc" id="L20">    private Long id;</span>
+<span class="fc" id="L18">    private Long id;</span>
 
-<span class="fc" id="L22">    private String firstName;</span>
+<span class="fc" id="L20">    private String firstName;</span>
 
-<span class="fc" id="L24">    private String lastName;</span>
+<span class="fc" id="L22">    private String lastName;</span>
 
-<span class="fc" id="L26">    private int years;</span>
+<span class="fc" id="L24">    private int years;</span>
 
 
 }
