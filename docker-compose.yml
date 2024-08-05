@@ -1,6 +1,11 @@
 version: '3'
 services:
   ### Postgres inventario
+  oracle-db:
+    image: oracleinanutshell/oracle-xe-11g:latest
+    ports:
+      - 1521:1521
+      - 5500:5500
   db-inventory:
     container_name: db-inventory
     image: postgres:15.2
@@ -113,3 +118,22 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+  sonarqube:
+    image: sonarqube:lts
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    networks:
+      - sonarqube-network
+
+  sonarscanner:
+    image: sonarsource/sonar-scanner-cli:latest
+    container_name: sonarscanner
+    entrypoint: [ "/bin/sh", "-c", "sonar-scanner -Dsonar.host.url=http://sonarqube:9000 -Dsonar.login=${SONAR_TOKEN}" ]
+    environment:
+      - SONAR_TOKEN=sqa_fbcd3b81e26aed4317a9682464659b00de11d924
+    networks:
+      - sonarqube-network
+networks:
+  sonarqube-network:
+    driver: bridge
