@@ -2,6 +2,7 @@ package com.rabbitmq.consumer.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 public class Data implements Serializable {
 
     private static final long serializableVersionID= 1L;

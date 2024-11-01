@@ -7,6 +7,7 @@ import com.persona.ejemplo.specification.PeopleSpecification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,8 +47,6 @@ public class PeopleServiceImplTest {
     peopleEntity2 = new PeopleEntity(2L, "Sebastian", "Munoz", 24);
     listPeopleEntity.add(peopleEntity);
     listPeopleEntity.add(peopleEntity2);
-
-
 
   }
 

@@ -18,39 +18,40 @@ import java.util.Optional;
 
 <span class="fc" id="L19">@Slf4j</span>
 @Service
-<span class="fc" id="L21">public class PeopleServiceImpl implements PeopleService{</span>
+<span class="fc" id="L21">@RequiredArgsConstructor</span>
+public class PeopleServiceImpl implements PeopleService{
 
-    @Autowired
-    private PeopleRepository peopleRepository;
 
-<span class="fc" id="L26">    private final Sort sort = Sort.by(Sort.Order.asc(&quot;id&quot;));</span>
+    private final PeopleRepository peopleRepository;
+
+<span class="fc" id="L27">    private final Sort sort = Sort.by(Sort.Order.asc(&quot;id&quot;));</span>
 
 
     @Override
     public PeopleEntity createPeople(PeopleEntity peopleEntity) {
-<span class="fc" id="L31">        return peopleRepository.save(peopleEntity);</span>
+<span class="fc" id="L32">        return peopleRepository.save(peopleEntity);</span>
     }
 
     @Override
     public Optional&lt;PeopleEntity&gt; findByIdPeople(Long id) {
-<span class="fc" id="L36">        return peopleRepository.findById(id);</span>
+<span class="fc" id="L37">        return peopleRepository.findById(id);</span>
     }
 
     @Override
     public List&lt;PeopleEntity&gt; listPeopleEntities() {
-<span class="fc" id="L41">        return peopleRepository.findAll(sort);</span>
+<span class="fc" id="L42">        return peopleRepository.findAll(sort);</span>
     }
 
     @Override
     public Page&lt;PeopleEntity&gt; listByText(String searchText, int page, int size) {
-<span class="fc" id="L46">        Pageable pageable = PageRequest.of(page, size, Sort.by(&quot;id&quot;).ascending());</span>
+<span class="fc" id="L47">        Pageable pageable = PageRequest.of(page, size, Sort.by(&quot;id&quot;).ascending());</span>
 
-<span class="fc" id="L48">        Page&lt;PeopleEntity&gt; res = peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), pageable);</span>
-<span class="fc" id="L49">        log.info(&quot;RESSSSS {}&quot;, res);</span>
-<span class="pc bpc" id="L50" title="2 of 4 branches missed.">        if (res != null &amp;&amp; !res.getContent().isEmpty()) {</span>
-<span class="fc" id="L51">            log.info(&quot;EJEMPLO DE IF {}&quot;, res);</span>
+<span class="fc" id="L49">        Page&lt;PeopleEntity&gt; res = peopleRepository.findAll(PeopleSpecification.firstNameOrLastNameContainsIgnoreCase(searchText), pageable);</span>
+<span class="fc" id="L50">        log.info(&quot;RESSSSS {}&quot;, res);</span>
+<span class="pc bpc" id="L51" title="2 of 4 branches missed.">        if (res != null &amp;&amp; !res.getContent().isEmpty()) {</span>
+<span class="fc" id="L52">            log.info(&quot;EJEMPLO DE IF {}&quot;, res);</span>
         }
-<span class="fc" id="L53">        return res;</span>
+<span class="fc" id="L54">        return res;</span>
     }
 
 

@@ -18,10 +18,11 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class PeopleServiceImpl implements PeopleService{
 
-    @Autowired
-    private PeopleRepository peopleRepository;
+
+    private final PeopleRepository peopleRepository;
 
     private final Sort sort = Sort.by(Sort.Order.asc("id"));
 

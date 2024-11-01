@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="publisher" />
+        <module name="SpringBatchApplicationChung" />
         <module name="consumer" />
         <module name="tasks" />
         <module name="ejemplo" />
@@ -28,6 +29,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="SpringBatchApplicationChung" options="-parameters" />
       <module name="consumer" options="-parameters" />
       <module name="ejemplo" options="-parameters" />
       <module name="publisher" options="-parameters" />

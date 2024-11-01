@@ -39,8 +39,6 @@ public class StudentPersistenceAdapter implements StudentPersistencePort {
     @Override
     public Student save(Student student) {
         StudentEntity studentEntity  = mapper.toStudentEntity(student);
-        log.info("AGEEEE ANTES DE GUARDAR {}", studentEntity.getAge());
-        log.info(String.valueOf(mapper.toStudentEntity(student).getAge()));
         return mapper.toStudent(studentRepository.save(studentEntity));
     }
 
